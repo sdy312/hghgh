@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>فرم خرید و فروش ارز و کالا</title>
+  <style>
+    body { font-family: Tahoma; background: #f0f8ff; padding: 20px; }
+    label, input, select, button { display: block; margin: 10px 0; }
+    table { border-collapse: collapse; margin-top: 20px; width: 100%; }
+    th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>فرم ثبت خرید/فروش</h2>
+  <form id="tradeForm">
+    <label>تاریخ: <input type="date" id="date"></label>
+    <label>نوع: 
+      <select id="type">
+        <option value="ارز">ارز</option>
+        <option value="کالا">کالا</option>
+      </select>
+    </label>
+    <label>نام ارز/کالا: <input type="text" id="name"></label>
+    <label>مقدار: <input type="number" id="amount"></label>
+    <label>قیمت واحد: <input type="number" id="price"></label>
+    <label>نوع تراکنش:
+      <select id="transaction">
+        <option value="خرید">خرید</option>
+        <option value="فروش">فروش</option>
+      </select>
+    </label>
+    <button type="submit">ثبت</button>
+  </form>
+
+  <table id="dataTable">
+    <thead>
+      <tr><th>تاریخ</th><th>نوع</th><th>نام</th><th>مقدار</th><th>قیمت</th><th>تراکنش</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById("tradeForm");
+    const table = document.getElementById("dataTable").querySelector("tbody");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const row = document.createElement("tr");
+      ["date", "type", "name", "amount", "price", "transaction"].forEach(id => {
+        const td = document.createElement("td");
+        td.textContent = document.getElementById(id).value;
+        row.appendChild(td);
+      });
+      table.appendChild(row);
+      form.reset();
+    });
+  </script>
+</body>
+</html>
